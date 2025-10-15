@@ -342,7 +342,16 @@ public class Controleur implements Observable {
     }
 
     public void chargerInstrument(File fichier) {
-        // todo
+        try {
+            Scanner scanner = new Scanner(fichier);
+
+            String nom = scanner.nextLine();
+            // todo
+
+        } catch (FileNotFoundException e) {
+            System.out.println("An error with occured while reading the file " + fichier);
+            e.printStackTrace();
+        }
     }
 
     public void renommerInstrument(String nouveauNom) {
