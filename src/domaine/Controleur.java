@@ -12,15 +12,8 @@ import gui.ProprietesTouche;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Point;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
+
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import java.util.ArrayList;
@@ -330,7 +323,22 @@ public class Controleur implements Observable {
     }
 
     public void sauvegarderInstrument(File fichier) {
-        // todo
+        try {
+            Instrument instrument = getInstrument();
+            FileWriter fileWriter = new FileWriter(fichier);
+
+            fileWriter.write(instrument.getNomInstrument());
+            fileWriter.write(instrument.getSequenceur().toString());
+            fileWriter.write(instrument.getChannels().toString());
+            fileWriter.write(instrument.getImageFond().toString());
+            fileWriter.write(instrument.getListeTouches().toString());
+            fileWriter.write(instrument.getSequenceur().toString());
+            fileWriter.close();
+
+        } catch (IOException e) {
+            System.out.println("An error with occured while writing to the file " + fichier);
+            e.printStackTrace();
+        }
     }
 
     public void chargerInstrument(File fichier) {
